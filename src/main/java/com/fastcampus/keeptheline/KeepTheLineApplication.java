@@ -8,6 +8,7 @@ public class KeepTheLineApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KeepTheLineApplication.class, args);
+		System.out.println("fight!");
 	}
 
 }
