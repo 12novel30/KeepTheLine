@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--xmlns:th="http://www.thymeleaf.org" -> 타임리프 템플릿으로 사용 가능-->
+<head>
+    <meta charset="UTF-8">
+    <title>places</title>
+</head>
+<body>
+<p>
+  this is basic place page.
+</p>
+<ul>
+  <li>placeType: <span th:text="${placeType} ?:_">?</span></li>
+    <!-- ?:_ => 기본값을 ? 로 하겠다-->
+  <li>placeName: <span th:text="${placeName} ?:_">?</span></li>
+  <li>address: <span th:text="${address} ?:_">?</span></li>
+</ul>
+</body>
+</html>

@@ -4,12 +4,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @RequestMapping("/api")
-// @RestController
+@RequestMapping("/api")
+@RestController
 public class APIPlaceController {
     @GetMapping("/places")
     public List<String> getPlaces(){
-        return null;
+        return List.of("place1", "place2");
     }
     @PostMapping("/places")
     public Boolean createPlace(){
