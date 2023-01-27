@@ -8,24 +8,23 @@ import org.springframework.web.servlet.function.ServerResponse;
 import java.util.List;
 
 import static org.springframework.web.servlet.function.RouterFunctions.route;
+import static org.springframework.web.servlet.function.RequestPredicates.path;
 
 @Configuration
 public class APIPlaceRouter {
     // 함수형 프로그래밍 예시
     // APIPlaceController 와 상응
+
     @Bean
-    public RouterFunction<ServerResponse> placeRouter(){
-        return route()
-                .GET("/api/places", req -> ServerResponse.ok()
-                        .body(List.of("place1", "place2")))
-                .POST("/api/places", req -> ServerResponse.ok()
-                        .body(true))
-                .GET("/api/places/{placeId}", req -> ServerResponse.ok()
-                        .body("place" + req.pathVariable("placeId")))
-                .PUT("/api/places/{placeId}", req -> ServerResponse.ok()
-                        .body(true))
-                .DELETE("/api/places/{placeId}", req -> ServerResponse.ok()
-                        .body(true))
-                .build();
+    public RouterFunction<ServerResponse> placeRouter(
+            APIPlaceHandler apiPlaceHandler
+    ){
+        return route().nest(path("/api/places"), builder -> builder
+                .GET("", apiPlaceHandler::getPlaces)
+                .POST("", apiPlaceHandler::createPlace)
+                .GET("/{placeId}", apiPlaceHandler::getPlaceDetail)
+                .PUT("/{placeId}", apiPlaceHandler::modifyPlace)
+                .DELETE("/{placeId}", apiPlaceHandler::removePlace)
+        ).build();
     }
 }
